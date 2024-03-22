@@ -9,12 +9,10 @@ runs:
       run: |
         PROJECT_PATH=$(pwd)
 
-        # ToDo: Add documentation and describe better this command
+        # Run CTest to execute tests from build/tests and display output in case of failures.
         ctest --test-dir build/tests --output-on-failure
 
-        # ToDo: Add documentation and describe better this command
-
-
+        # Generate code coverage report using gcovr.
         gcovr -r $PROJECT_PATH . > $PROJECT_PATH/coverage.txt
 
         echo "Runnig: gcovr -r $PROJECT_PATH ."
@@ -22,7 +20,7 @@ runs:
         cat $PROJECT_PATH/coverage.txt
 
         # Find the value of correct coverage
-        # ToDo: Add documentation and describe better this command
+        # Get the code coverage percentage from the coverage report and determine if it meets a 20% threshold.
         COVERAGE_RESULT=$(grep "TOTAL" $PROJECT_PATH/coverage.txt | awk '{print $NF}' | cut -d '%' -f 1)
 
         # Coverage lines GT 20
